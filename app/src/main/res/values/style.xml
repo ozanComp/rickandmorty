@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">@color/chip_color</item>
+        <item name="chipStrokeColor">@color/chip_color</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipCornerRadius">8dp</item>
+        <item name="chipBackgroundColor">@color/gray</item>
+    </style>
+
+
+    <style name="BottomSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_filter</item>
+    </style>
+
+    <style name="TextColor">
+        <item name="android:textColor">@color/text_blue</item>
+    </style>
+
+</resources>

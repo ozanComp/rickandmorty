@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">OBSS-R&amp;M</string>
+
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_characters">Characters</string>
+
+    <string name="title_characters">Characters</string>
+    <string name="title_reset">Reset</string>
+
+    <string name="title_btn_reset">Reset</string>
+
+    <string name="title_btn_apply">Apply</string>
+
+    <string name="title_filter">Filter</string>
+    <string name="title_status">Status</string>
+
+    <string name="txt_chip_alive">Alive</string>
+    <string name="txt_chip_dead">Dead</string>
+    <string name="txt_chip_unknown">unknown</string>
+
+
+    <string name="title_number_of_episodes">Number Of Episodes</string>
+    <string name="title_origin">Origin Location</string>
+    <string name="title_last_location">Last Location</string>
+    <string name="title_last_episode">Last Episode</string>
+
+
+
+</resources>

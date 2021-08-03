@@ -1,0 +1,2 @@
+rootProject.name = "OBSS-R&M"
+include ':app'
