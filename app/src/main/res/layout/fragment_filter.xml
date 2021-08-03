@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
+        style="@style/TextColor"
         android:text="@string/title_filter"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_status"
-            tools:textColor="@color/white"
+            style="@style/TextColor"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -77,7 +78,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/background_filter_button"
-        android:text="@string/title_btn_apply"
+        android:text="@string/title_apply"
         android:textColor="@color/white"
         app:backgroundTint="@null" />
 

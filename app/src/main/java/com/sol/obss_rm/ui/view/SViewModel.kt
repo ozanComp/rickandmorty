@@ -1,56 +1,78 @@
 package com.sol.obss_rm.ui.view
 
 import androidx.lifecycle.*
-import androidx.paging.*
 import com.sol.obss_rm.model.Episode
 import com.sol.obss_rm.api.Repository
 import com.sol.obss_rm.model.Character
-import kotlinx.coroutines.flow.Flow
+import com.sol.obss_rm.model.PageInfo
 import kotlinx.coroutines.launch
 
-@ExperimentalPagingApi
 class SViewModel(val repository: Repository = Repository.getInstance()) : ViewModel() {
     var filterValue = MutableLiveData<Array<Int>>()
+    var pageInfo =  MutableLiveData<PageInfo>()
     var isFilter = MutableLiveData<Boolean>()
     var lastEpisode = MutableLiveData<Episode>()
-    lateinit var characters: Flow<PagingData<Character>>
+    var characters = MutableLiveData<List<Character>>()
+    var isDisplayModeGrid = MutableLiveData<Boolean>()
+    var options = MutableLiveData<HashMap<String, String>>()
+
+    var currentPage:Int = 0
 
     init {
+        currentPage = 1
         filterValue.value = arrayOf(0)
         isFilter.value = false
+        isDisplayModeGrid.value = true
+        options.value = HashMap()
+    }
+
+    fun reset(){
+        currentPage = 1
+        isFilter.value = false
+        options.value!!.clear()
+    }
+
+    fun nextPage(){
+        viewModelScope.launch{
+            currentPage++
+
+            getCharacters()
+        }
+    }
+
+    fun prevPage(){
+        viewModelScope.launch{
+            if(currentPage != 0)
+                currentPage--
+
+            getCharacters()
+        }
     }
 
     fun getCharacters(){
-        val options: HashMap<String, String> = HashMap()
+        options.value!!["page"] = "" + currentPage
+
         viewModelScope.launch{
             try{
-                characters = repository.getCharacters(options).cachedIn(viewModelScope)
-            }catch (e:Exception){ }
+                val char = repository.getCharacters(options.value!!)
+                characters.value = char.results
+                pageInfo.value = char.info
+            }catch(e: Exception){ }
         }
     }
 
     fun getByStatus(status : String){
-        val options: HashMap<String, String> = HashMap()
-        options["status"] = status
+        options.value!!["status"] = "" + status
+        getCharacters()
 
-        viewModelScope.launch{
-            try{
-                characters = repository.getCharacters(options).cachedIn(viewModelScope)
-                isFilter.value = true
-            }catch(e: Exception){ }
-        }
+        isFilter.value = true
     }
 
     fun getByName(name: String){
-        val options: HashMap<String, String> = HashMap()
-        options["name"] = name
+        options.value!!["name"] = "" + name
+        getCharacters()
 
-        viewModelScope.launch{
-            try{
-                characters = repository.getCharacters(options).cachedIn(viewModelScope)
-                isFilter.value = true
-            }catch(e: Exception){ }
-        }
+        isFilter.value = true
     }
 
     fun getEpisode(episode: Int) {
